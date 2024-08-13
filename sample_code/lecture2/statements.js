@@ -13,6 +13,17 @@ if (num > 0) {
   console.log('Number is zero');
 }
 
+switch (num) {
+  case 0:
+    console.log('Number is zero');
+    break;
+  case 1:
+    console.log('Number is one');
+    break;
+  default:
+    console.log('Number is neither zero nor one');
+}
+
 // Loop Statements (for loop)
 for (let i = 0; i < 5; i++) {
   console.log('Iteration:', i);
