@@ -15,6 +15,8 @@ if (x === 3) {
   console.log(y);
 }
 
+// output: undefined 5 5
+
 
 // 2.
 var x = 3;
@@ -23,4 +25,6 @@ if (x === 3) {
   console.log(x);
 }
 console.log(x);
+
+// output: 2 2
 
