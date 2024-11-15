@@ -5,6 +5,13 @@
 */
 function extend(o, p) {
     // implement your code here
+    for (let property in p) {
+        if (p in o) {
+            o[property] = p[property]
+        }else {
+            o[property] = p[property]
+        }
+    }
 }
 
 /*
@@ -13,6 +20,11 @@ function extend(o, p) {
 */
 function union(o, p) {
     // implement your code here
+    for (let property in p) {
+        if (!(property in o)) {
+            o[property] = p[property]
+        }
+    }
 }
 
 /*
@@ -21,6 +33,11 @@ function union(o, p) {
 */
 function restrict(o, p) {
     // implement your code here
+    for (let property in o) {
+        if (!(property in p)) {
+            delete o[property]
+        }
+    }
 }
 
 /*
@@ -30,4 +47,10 @@ function restrict(o, p) {
 */
 function intersection(o, p) {
     // implement your code here
+    for (let property in o) {
+        if (!(property in p)) {
+            delete o[property]
+        }
+    }
+    // I don't see a difference between this function and function restrict
 }
