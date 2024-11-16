@@ -12,5 +12,14 @@
  * user.password; // undefined
  */
 function User() {
-    // implement here
+  let password
+
+  this.setPassword = (pw) => {
+    if (pw.length < 6)  throw new Error("Password needs to have at least 6 characters")
+    password = pw
+  }
+
+  this.checkPassword = (pw) => {
+    return pw === password
+  }
 }

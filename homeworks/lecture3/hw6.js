@@ -18,12 +18,26 @@
  * 1 <= nums[i] <= 100
  */
 function numIdenticalPairs(nums) {
-  // implement here
+  let mapping = {}  // element as key, frequency as value
+  let res = 0
+
+  for (const num of nums) {
+    if (mapping.hasOwnProperty(num)) {
+      let freq = mapping[num]
+      res += freq
+      mapping[num] = freq + 1
+    } else {
+      mapping[num] = 1
+    }
+  }
+  return res
 }
 
 /**
  * Given a string s, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
  */
 function removeVowels(s) {
-  // implement here
+  let arr = s.toLowerCase().split('')
+  let removedArr = arr.filter((ele) => ele !== 'a' && ele !== 'e' && ele !== 'i' && ele !== 'o' && ele !== 'u')
+  return removedArr.join('')
 }
