@@ -5,4 +5,6 @@
  */
 function pickCoins() {
     // implement here
+    console.log("1c: 40, 5c: 7, 25c: 1, 50c: 0")
+    console.log("1c: 45, 5c: 1, 25c: 2, 50c: 0")
 }

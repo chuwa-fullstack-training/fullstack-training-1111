@@ -4,4 +4,12 @@
  */
 function sum() {
     // implement here
+    if (arguments.length === 2) {
+        return arguments[0] + arguments[1]
+    } else {
+        const num = arguments[0];
+        return function (a) {
+            return a + num
+        }
+    }
 }

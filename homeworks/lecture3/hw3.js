@@ -1,5 +1,23 @@
 function counter() {
     // implement here
+    var count_result = 0;
+
+    num = arguments;
+
+    function count(num) {
+        if (!num) {
+            getResult();
+        }else {
+            count_result += num;
+            getResult();
+        }
+    }
+
+    function getResult() {
+        console.log(count_result)
+    }
+
+    return count(num)
 }
 
 let count = counter();
