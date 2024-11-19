@@ -1,5 +1,13 @@
 function counter() {
     // implement here
+    let res = 0;
+    return function(){
+        
+        for(let i of arguments){
+            res += i;
+        }
+        return res;
+    }
 }
 
 let count = counter();
