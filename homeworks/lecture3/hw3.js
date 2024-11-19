@@ -2,22 +2,13 @@ function counter() {
     // implement here
     var count_result = 0;
 
-    num = arguments;
-
-    function count(num) {
-        if (!num) {
-            getResult();
-        }else {
+    return function(num) {
+        if (num) {
             count_result += num;
-            getResult();
         }
+        return count_result
     }
 
-    function getResult() {
-        console.log(count_result)
-    }
-
-    return count(num)
 }
 
 let count = counter();
