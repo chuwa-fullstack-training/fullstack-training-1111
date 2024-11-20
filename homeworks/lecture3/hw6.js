@@ -18,12 +18,21 @@
  * 1 <= nums[i] <= 100
  */
 function numIdenticalPairs(nums) {
-  // implement here
+  let cnt = 0;
+  let mp = {};
+  for (let num of nums) {
+    if (mp[num]) {
+      cnt += mp[num]++;
+    } else {
+      mp[num] = 1;
+    }
+  }
+  return cnt;
 }
 
 /**
  * Given a string s, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
  */
 function removeVowels(s) {
-  // implement here
+  return s.replace(/[aeiou]/gi, '');
 }
