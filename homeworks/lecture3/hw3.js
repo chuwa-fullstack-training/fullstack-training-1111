@@ -1,5 +1,13 @@
 function counter() {
     // implement here
+    let cnt = 0;
+
+    function inc(n = 0) {
+        cnt += n;
+        return cnt;
+    }
+
+    return inc;
 }
 
 let count = counter();
