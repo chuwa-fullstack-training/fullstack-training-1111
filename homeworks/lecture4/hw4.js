@@ -12,4 +12,10 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
+  let intersections = nums1.filter(curVal => nums2.includes(curVal))
+  return intersections
 };
+
+let nums1 = [4,9,5]
+let nums2 = [9,4,9,8,4]
+console.log(intersection(nums1, nums2))
