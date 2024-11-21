@@ -8,7 +8,20 @@
  * @param {string[]} str
  */
 function reverseWords(str) {
-  // your code here
+  let reversedArr = []
+  let lastWord = str.reduce((acc, ch) => {
+    if (ch !== ' ')   return acc.concat(ch)
+    else {
+      reversedArr.push(acc)
+      return ''
+    }   
+  }, '')
+
+  if (lastWord !== ' ') {
+    reversedArr.push(lastWord);
+  }
+
+  return reversedArr.reverse().join(' ')
 }
 
 const input = 'the sky is blue'.split(''); // ['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e']
