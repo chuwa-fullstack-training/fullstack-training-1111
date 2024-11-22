@@ -13,3 +13,22 @@ function sum() {
         }
     }
 }
+
+// Tried to implement currying here but didn't work
+
+// function curry(fun) {
+//     return function(a) {
+//         return function(b) {
+//             return fun(a, b)
+//         }
+//     }
+// }
+
+// function add(a, b) {
+//     return a + b
+// }
+
+// let sum = curry(add);
+
+// console.log(sum(2)(3));
+// console.log(sum(2, 3));
