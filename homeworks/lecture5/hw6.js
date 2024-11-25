@@ -13,7 +13,12 @@ function sequencePromise(urls) {
   }
   // implement your code here
 
-  return results;
+  return urls.reduce(
+    (promiseChain, currentUrl) =>
+      promiseChain.then(() => fetchOne(currentUrl)),
+    Promise.resolve() 
+  )
+  .then(() => results); 
 }
 
 // option 1
@@ -25,7 +30,14 @@ function getJSON(url) {
 // function getJSON(url) {
 //     return fetch(url).then(res => res.json());
 // }
-
+function getJSON(url) {
+  return fetch(url).then((res) => {
+    if (!res.ok) {
+      throw new Error(`Failed with status code: ${res.status}`);
+    }
+    return res.json();
+  });
+}
 // test your code
 const urls = [
   'https://api.github.com/search/repositories?q=javascript',

@@ -2,6 +2,7 @@
 
 const https = require('https');
 
+
 // function httpsRequest(url) {
 //   const options = {
 //     headers: {
@@ -38,7 +39,37 @@ const https = require('https');
 // }
 
 function getJSON(url) {
-  // implement your code here
+  return new Promise((resolve, reject) => {
+    const options = {
+      headers: {
+        'User-Agent': 'request' 
+      }
+    };
+
+    const request = https.get(url, options, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed with status code: ${response.statusCode}`));
+        response.resume(); 
+      }
+
+      let data = '';
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      response.on('end', () => {
+        try {
+          resolve(JSON.parse(data)); /
+        } catch (error) {
+          reject(new Error(`Error parsing JSON: ${error.message}`));
+        }
+      });
+    });
+
+    request.on('error', (err) => {
+      reject(new Error(`Request error: ${err.message}`));
+    });
+  });
 }
 
 getJSON('https://api.github.com/search/repositories?q=javascript')
