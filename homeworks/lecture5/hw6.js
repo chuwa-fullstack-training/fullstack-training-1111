@@ -19,7 +19,22 @@ function sequencePromise(urls) {
     Promise.resolve() 
   )
   .then(() => results); 
-}
+} 
+async  function sequencePromise(urls) {
+  const results = [];
+  function fetchOne(url) {
+    // for `getJSON` function you can choose either from the implementation of hw5 or `fetch` version provided by browser
+    // if you use `fetch`, you have to use browser console to test this homework
+    return getJSON(url).then(response => results.push(response));
+  }
+  // implement your code here
+
+  for (const url of urls){
+    const response = await getJSON(url);
+    results.push(response);
+  }
+  return results;
+} 
 
 // option 1
 function getJSON(url) {
