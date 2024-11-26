@@ -4,7 +4,7 @@
 function largestElement(list) {
     // implement your code here
     let max = list[0]
-    for (let i in list) {
+    for (let i of list) {
         if (a > max){
             max = a
         }
@@ -29,7 +29,7 @@ function reverseList(list) {
 function checkTwice(list, element) {
     // implement your code here
     let count = 0
-    for (let num in list){
+    for (let num of list){
         if (num === element){
             count ++
         }
