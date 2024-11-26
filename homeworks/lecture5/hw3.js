@@ -9,6 +9,8 @@ new Promise((resolve, reject) => {
   console.log('e');
   reject('f');
 }).then(result => console.log(result));
+// output: a, c, e, d, b
+// main callstack > promise (microtask) > .then > setTimeout (task)
 
 // 2
 const fn = () =>
@@ -22,3 +24,8 @@ fn().then(res => {
 });
 
 console.log('start');
+// output: 1, start, success
+// console.log(1) is immediately executed when new Promise object (sync), call resovle('success') to mark promise as resolved
+// main callstack print 'start'
+// fn()'s promise is resolved, schedule .then() callback in next microtask queue
+// after all sync events are executed, microtask queue calls .then() callback and print 'success'
