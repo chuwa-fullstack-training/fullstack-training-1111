@@ -1,0 +1,40 @@
+/** Implement a User class with a private variable #password (Use closure, not # syntax).
+ * The class should have methods to setPassword and checkPassword.
+ * 
+ * Example:
+ * const user = new User();
+ * user.setPassword('123456');
+ * user.checkPassword('123456'); // true
+ * user.checkPassword('123'); // false
+ * user.password; // undefined
+ * user.setPassword('123'); // Error
+ * user.checkPassword('123'); // false
+ * user.password; // undefined
+ */
+function User() {
+    let password = ''; // 私有变量
+
+    return {
+        setPassword: function (newPassword) {
+            if (typeof newPassword === 'string' && newPassword.length >= 6) {
+                password = newPassword;
+            } else {
+                throw new Error('Password must be a string with at least 6 characters.');
+            }
+        },
+        checkPassword: function (inputPassword) {
+            return inputPassword === password;
+        }
+    };
+}
+
+// 测试用例
+const user = new User();  //user作为外部函数执行
+user.setPassword('123456');//setpassword作为闭包还能够访问password，且password值会保存
+console.log(user.checkPassword('123456')); // true
+console.log(user.checkPassword('123'));    // false
+try {
+    user.setPassword('123'); // 抛出错误
+} catch (err) {
+    console.log(err.message); // "Password must be a string with at least 6 characters."
+}
