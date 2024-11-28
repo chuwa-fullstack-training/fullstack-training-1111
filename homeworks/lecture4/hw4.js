@@ -11,5 +11,7 @@
  *
  */
 const intersection = (nums1, nums2) => {
-  // Your solution here
+  let st = new Set(nums1);
+  let tmp = nums2.filter((x) => st.has(x));
+  return Array.from(new Set(tmp));
 };
