@@ -20,3 +20,5 @@ new Promise((resolve, reject) => {
 }).then(data => console.log(data));
 
 console.log('End');
+
+// Start, 4, End, 3, 5, 2, 1, 1.5, 1.6

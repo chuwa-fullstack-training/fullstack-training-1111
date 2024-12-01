@@ -39,6 +39,42 @@ const https = require('https');
 
 function getJSON(url) {
   // implement your code here
+  return new Promise((resolve, reject) => {
+    const options = {
+      headers: {
+        'User-Agent': 'request'
+      }
+    };
+
+    const request = https.get(url, options, response => {
+      if(response.statusCode !== 200){
+        reject(`Did not get an OK from the server. Code: ${response.statusCode}`)
+        response.resume() 
+        // The readable.resume() method causes an explicitly paused Readable stream to resume emitting 'data' events, switching the stream into flowing mode. The readable.resume() method can be used to fully consume the data from a stream without actually processing any of that data.
+      }
+
+      let data = ''
+
+      response.on('data', chunk => {
+        data += chunk;
+      });
+
+      response.on('end', () => {
+        try {
+          // When the response body is complete, we can parse it and log it to the console
+          resolve(JSON.parse(data));
+        } catch (e) {
+          // If there is an error parsing JSON, log it to the console and throw the error
+          reject(new Error(e.message))
+        }
+      });
+    })
+
+    request.on('error', err => { // this handles request level errors
+      reject(err.message)
+    })
+    
+  })
 }
 
 getJSON('https://api.github.com/search/repositories?q=javascript')
