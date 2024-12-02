@@ -13,10 +13,17 @@
  * @param {number} delay
  * @returns {function}
  */
-function debounce(func, delay) {
-  // your code here
-}
 
+function debounce(func, delay) {
+  let timer;
+  // your code here
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args); 
+    }, delay);
+  };
+}
 /**
  * implement throttle function
  * explain: `func` will be called every `delay` ms. if `func` is called again before `delay` ms, the call will be ignored
@@ -33,5 +40,12 @@ function debounce(func, delay) {
  * @returns {function}
  */
 function throttle(func, delay) {
-  // your code here
+  let lastCall = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      func.apply(this, args); 
+    }
+  };
 }

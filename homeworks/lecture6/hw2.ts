@@ -37,3 +37,20 @@ function logPerson(person: Person) {
 }
 
 persons.forEach(logPerson);
+
+
+/*
+function logPerson(person: Person) {
+  let additionalInformation: string;
+  if ("role" in person) {
+    additionalInformation = person.role;
+  } else {
+    additionalInformation = person.occupation;
+  }
+  console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
+}
+
+persons.forEach(logPerson);
+
+TypeScript cannot infer whether person is a User or an Admin when trying to access person.role or person.occupation. 
+*/
