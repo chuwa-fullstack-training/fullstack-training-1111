@@ -13,18 +13,21 @@ function sequencePromise(urls) {
   }
   // implement your code here
 
-  return results;
+  return urls.reduce((promiseChain, url) => {
+    return promiseChain.then(() => fetchOne(url));
+  }, Promise.resolve())
+  .then(() => results);
 }
 
 // option 1
-function getJSON(url) {
+//function getJSON(url) {
   // this is from hw5
-}
+//}
 
 // option 2
-// function getJSON(url) {
-//     return fetch(url).then(res => res.json());
-// }
+function getJSON(url) {
+    return fetch(url).then(res => res.json());
+}
 
 // test your code
 const urls = [
