@@ -15,6 +15,14 @@
  */
 function debounce(func, delay) {
   // your code here
+  let timer;
+
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay)
+  }
 }
 
 /**
@@ -34,4 +42,15 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   // your code here
+  let isRunning = false;
+
+  return (...args) => {
+    if (!isRunning) {
+      isRunning = true;
+      func.apply(this, args);
+      setTimeout(() => {
+        isRunning = false;
+      }, delay)
+    }
+  }
 }

@@ -28,7 +28,9 @@ const persons: Person[] = [
 // fix the error showing in the following code:
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  // Change if (person.role) into if ('role' in person) should solve the problem
+  // since Person type doesn't have role attribute, we can't use person.role directly.
+  if ('role' in person) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
