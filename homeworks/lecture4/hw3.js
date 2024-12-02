@@ -8,3 +8,18 @@
  */
 
 // your code here
+
+//ES5
+function Singleton() {
+    Singleton.instance = this;
+    this.name = 'Singleton Instance';
+    return this;
+}
+
+//ES6
+class Singleton {
+    constructor() {
+        Singleton.instance = this;
+        this.name = 'Singleton Instance';
+    }
+}
