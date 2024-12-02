@@ -9,6 +9,9 @@ new Promise((resolve, reject) => {
   console.log('e');
   reject('f');
 }).then(result => console.log(result));
+// a c e d b  
+// a and c and e will immidiately print out, when in microtask queue the d will be print out since it is resolve and in the end is b
+
 
 // 2
 const fn = () =>
@@ -22,3 +25,6 @@ fn().then(res => {
 });
 
 console.log('start');
+
+// 1 start success 
+// when fn got called, the 1 will print out, and it will print start since it is synchronous after promise executor finishes and after synchronous code finishes, then .then() callback will executed 
