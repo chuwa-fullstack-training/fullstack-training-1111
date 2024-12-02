@@ -15,6 +15,13 @@
  */
 function debounce(func, delay) {
   // your code here
+  let timeOutId;
+  return function (...args) {
+    clearTimeout(timeOutId)
+    timeOutId = setTimeout( () => {
+      func.apply(this, args)
+    }, delay)
+  }
 }
 
 /**
@@ -34,4 +41,16 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   // your code here
+  let shouldWait = false;
+
+  return function(...args) {
+    if (!shouldWait)   return;
+
+    shouldWait = true;
+    func.apply(this, args);
+    setTimeout(() => {
+      shouldWait = false;
+    }, delay);
+  }
+ 
 }

@@ -26,9 +26,10 @@ const persons: Person[] = [
 ];
 
 // fix the error showing in the following code:
+// property role and occupation aren't exist in both members of the union type, but when we use union type, we can only use props and methods that are common to all members
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ('role' in person) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
