@@ -1,4 +1,4 @@
-interface User {
+interface User1 {
   name: string;
   age: number;
   occupation: string;
@@ -10,7 +10,7 @@ interface Admin {
   role: string;
 }
 
-type Person = User | Admin;
+type Person = User1 | Admin;
 
 const persons: Person[] = [
   {
@@ -28,7 +28,7 @@ const persons: Person[] = [
 // fix the error showing in the following code:
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ("role" in person) {     //The in operator checks if a property exists on an object.
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
@@ -37,3 +37,6 @@ function logPerson(person: Person) {
 }
 
 persons.forEach(logPerson);
+
+// if (person.role) {} TypeScript cannot verify that person.role is a valid property 
+// because the role property only exists on the Admin interface and not on the User1 interface
