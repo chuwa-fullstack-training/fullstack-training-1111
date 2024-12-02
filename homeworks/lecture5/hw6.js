@@ -12,6 +12,9 @@ function sequencePromise(urls) {
     return getJSON(url).then(response => results.push(response));
   }
   // implement your code here
+  for (let url of urls) {
+    fetchOne(url);
+  }
 
   return results;
 }

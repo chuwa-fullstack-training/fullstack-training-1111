@@ -15,6 +15,15 @@
  */
 function debounce(func, delay) {
   // your code here
+  let timer = null;
+  return function() {
+    if (!timer) {
+      timer = setTimeout(func, delay);
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(func, delay);
+    }
+  }
 }
 
 /**
@@ -34,4 +43,10 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   // your code here
+  let timer = null;
+  return function() {
+    if (!timer) {
+      timer = setTimeout(func, delay);
+    } 
+  }
 }

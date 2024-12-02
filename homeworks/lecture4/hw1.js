@@ -7,4 +7,18 @@
 
 function checkValidHTML(html) {
     // implement your solution here
+    let tags = html.match(/(<([^>|<]+)>?)/g);
+    let i = 0; 
+    let j = tags.length - 1;
+    while (i < j) {
+        let tagi = tags[i].replace('<', '').replace('>', '');
+        let tagj = tags[j].replace('</', '').replace('>', '');
+        if (tagi === tagj) {
+            ++ i;
+            -- j;
+        } else {
+            return false;
+        }
+    }
+    return true;
 }

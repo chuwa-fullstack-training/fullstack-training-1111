@@ -12,4 +12,16 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
+  let res = [];
+  let cnts = {};
+  for (let num of nums1) {
+    cnts[num] ++;
+  }
+  for (let num of nums2) {
+    if (num in cnts) {
+      res.push(num);
+      delete cnts[num];
+    }
+  }
+  return res;
 };

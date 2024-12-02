@@ -5,4 +5,11 @@
  */
 function pickCoins() {
     // implement here
+    let solution = '';
+    for (let i = 0; i < 48; ++ i) solution += '1c ';
+    console.log(solution);
+    solution = '';
+    for (let i = 0; i < 8; ++ i) solution += '5c ';
+    for (let i = 0; i < 8; ++ i) solution += '1c ';
+    console.log(solution);
 }

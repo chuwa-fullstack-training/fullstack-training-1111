@@ -6,4 +6,19 @@
  */
 function format(num) {
   // your code here
+  let res = "";
+  let numf = parseInt(num);
+  while (numf > 0) {
+    let digit = numf % 10;
+    if ((res.length - 3) % 4 === 0) {
+      res = "," + res;
+    }
+    res = digit + res;
+    numf = parseInt(numf / 10);
+  }
+  if (num - parseInt(num) !== 0) {
+    let rem = num - parseInt(num);
+    res = res + rem.toString().substring(1);
+  }
+  return res;
 }
