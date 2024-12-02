@@ -16,19 +16,19 @@ const persons: Person[] = [
   {
     name: "Aaron",
     age: 99,
-    occupation: "TypeScript Developer",
+    occupation: "TypeScript Developer", 
   },
   {
     name: "Alex",
     age: 98,
-    role: "System Administrator",
+    role: "System Administrator", 
   },
 ];
 
 // fix the error showing in the following code:
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ("role" in person) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
@@ -37,3 +37,6 @@ function logPerson(person: Person) {
 }
 
 persons.forEach(logPerson);
+/** 
+ *  Person is a union type (User | Admin), TypeScript cannot infer whether role exists without additional type checking.
+ */

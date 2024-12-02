@@ -12,4 +12,12 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
+
+  const n1 = new Set(nums1) 
+  const n2 = new Set(nums2)
+
+  return [...n1].filter(num => n2.has(num))
 };
+const nums1 = [1,2,2,1];
+const nums2 = [2,2]
+console.log(intersection(nums1, nums2)) // Output: [2]
