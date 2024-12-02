@@ -5,5 +5,23 @@
  * @param {number} num
  */
 function format(num) {
-  // your code here
+  let numArr = num.toString().split(".");
+  let wholeNumArr = numArr[0].split("");
+  let newWholeNumArr = [];
+  let counter = 0;
+
+  for (let i = wholeNumArr.length - 1; i >= 0; i --) {
+    if (counter === 3){
+      newWholeNumArr.unshift(',');
+      counter = 0;
+    }    
+    newWholeNumArr.unshift(wholeNumArr[i]);
+    counter ++;
+  }
+  let newNumStr = newWholeNumArr.join("");
+  return numArr[1] ? `${newNumStr}.${numArr[1]}` : newNumStr;
 }
+
+console.log(format(12345678))
+console.log(format(1234.56))
+console.log(format(0.1234))
