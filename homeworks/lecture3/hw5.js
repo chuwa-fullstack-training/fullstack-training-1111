@@ -12,5 +12,15 @@
  * user.password; // undefined
  */
 function User() {
-    // implement here
+    let password; 
+    this.setPassword = function(newPassword) {
+        if (typeof newPassword !== 'string' || newPassword.length < 6) {
+            throw new Error('Password must be at least 6 characters long');
+        }
+        password = newPassword;
+    };
+
+    this.checkPassword = function(inputPassword) {
+        return inputPassword === password;
+    };
 }

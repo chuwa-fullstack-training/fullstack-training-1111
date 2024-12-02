@@ -19,6 +19,19 @@
  */
 function numIdenticalPairs(nums) {
   // implement here
+  let count = 0;
+  const freq = {};
+
+  for (const num of nums){
+    if (freq[num]){
+      count += freq[num];
+      freq[num]++;
+    }
+    else{
+      freq[num] = 1;
+    }
+  }
+  return count;
 }
 
 /**
@@ -26,4 +39,5 @@ function numIdenticalPairs(nums) {
  */
 function removeVowels(s) {
   // implement here
+  return s.replace(/[aeiou]/gi, '');
 }
