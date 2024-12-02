@@ -28,10 +28,12 @@ const persons: Person[] = [
 // fix the error showing in the following code:
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ("role" in person) {
     additionalInformation = person.role;
+  } else if ("occupation" in person) {
+    additionalInformation = person.occupation as string;
   } else {
-    additionalInformation = person.occupation;
+    throw new Error("Invalid person object");
   }
   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
 }

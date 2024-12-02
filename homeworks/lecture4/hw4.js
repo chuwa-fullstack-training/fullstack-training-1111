@@ -12,4 +12,9 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
+  let newArray = [];
+  nums1.forEach((element) => {
+    if (nums2.include(element)) newArray.push(element);
+  });
+  return [...new Set(newArray)];
 };

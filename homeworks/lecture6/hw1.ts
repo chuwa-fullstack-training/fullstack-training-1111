@@ -6,7 +6,7 @@ type User = {
 
 function makeCustomer<T extends User>(u: T): T {
   return {
-    id: u.id,
+    ...u,
     type: "customer",
   };
 }
@@ -18,6 +18,6 @@ function f(a: string | number, b: string | number) {
   if (typeof a === "string") {
     return `${a} : ${b}`;
   } else {
-    return a + b;
+    return (a as number) + (b as number);
   }
 }
