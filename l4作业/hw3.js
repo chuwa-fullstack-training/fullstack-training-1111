@@ -8,6 +8,20 @@
  */
 
 // your code here
+//ES5
+function Singleton() {
+    if (Singleton.instance) {
+        return Singleton.instance; // Return the existing instance if it exists
+    }
+    Singleton.instance = this; // Store the instance in a static property
+}
+
+// Test ES5 Singleton
+const instance1 = new Singleton();
+const instance2 = new Singleton();
+console.log(instance1 === instance2); // Output: true
+
+//ES6
 class Singleton {
     static instance = null; // 定义静态属性
 
