@@ -14,3 +14,15 @@
  */
 
 // your code here
+
+const fs = require('fs')
+const path = require('path')
+
+let directory = process.argv[2]
+let extension = process.argv[3]
+
+
+fs.readdir(directory, (err, data) => {
+    if(err){ console.log(err)}
+    console.log(data.filter( file => path.extname(file) === extension))
+})
