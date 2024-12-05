@@ -8,14 +8,17 @@ function f() {
   }
   console.log(a);
 }
+// 7
 
 // 2. When executed, what value will be output?
+
 function f() {
   if (true) {
     var a = 5;
   }
   console.log(a);
 }
+// 5
 
 // 3. When executed, what value will be output?
 function f() {
@@ -23,6 +26,8 @@ function f() {
 }
 f();
 console.log(a);
+// 3
+// under none-strict mode, a became global variable without var const or let
 
 // 4.
 var a = 5;
@@ -35,6 +40,7 @@ function second() {
 }
 first();
 second();
+// 6
 
 // 5.
 var a = 5;
@@ -42,10 +48,22 @@ function f() {
   var a = 7;
   console.log(a);
 }
+// 7
 
 // 6.
 var a = 1;
 function b() {
+  a = 10;
+  return;
+  function a() {}
+}
+b();
+console.log(a);
+// 1
+// equals to, function a is hoisted to the top of the b function, so a = 10 refers to this local variable
+var a = 1;
+function b() {
+  function a() {}
   a = 10;
   return;
   function a() {}

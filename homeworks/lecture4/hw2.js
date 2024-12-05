@@ -15,3 +15,28 @@
  * const arr = [[0, 1], [2, 3], [4, [5, 6]]];
  * Expected output: [0, 1, 2, 3, 4, 5, 6]
  */
+
+// 1
+array.map((value) => 2 * value);
+
+// 2
+array.map((value) => value % 2 === 0);
+
+// 3
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+
+function reverseString(str) {
+  return str.split("").reduce((reversed, s) => s + reversed, "");
+}
+
+// 4
+function flatten(array) {
+  return array.reduce((acc, value) => {
+    if (Array.isArray(value)) {
+      return acc.concat(flatten(value));
+    }
+    return acc.concat(value);
+  }, []);
+}
