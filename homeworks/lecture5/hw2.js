@@ -8,8 +8,17 @@
  * @param {string[]} str
  */
 function reverseWords(str) {
-  // your code here
+  let left = 0,
+    right = str.length;
+  while (left < right) {
+    const temp = str[left];
+    str[left] = str[right];
+    str[right] = temp;
+
+    left++;
+    right--;
+  }
 }
 
-const input = 'the sky is blue'.split(''); // ['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e']
+const input = "the sky is blue".split(""); // ['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e']
 reverseWords(input);
