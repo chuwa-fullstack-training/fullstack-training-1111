@@ -14,3 +14,33 @@
  */
 
 // your code here
+const fs = require("fs");
+const path = require("path");
+
+const directoryPath = process.argv[2]; // Get the first command-line argument as the directory path
+const fileExtension = "." + process.argv[3]; // Get the second command-line argument as the file extension
+
+fs.readdir(directoryPath, (err, file) => {
+    if (err) {
+        console.log("Error");
+    }
+
+    //console.log(file);
+
+    //let ext = file.forEach(f => console.log(path.extname(f)));
+    //console.log(fileExtension);
+
+    let fileOutput = file.filter(f => path.extname(f) === fileExtension);
+
+    //console.log(fileOutput);
+
+    fileOutput.forEach(f => console.log(f));
+})
+
+// Output Test:
+// Command Line: node hw1.js C:\Users\13522\fullstack-training-11112024\sample_code\lecture7 txt
+// Output: 
+//  demo.txt
+// Command Line: node hw1.js C:\Users\13522\fullstack-training-11112024\sample_code\lecture7 json
+// Output: 
+//  package.json
