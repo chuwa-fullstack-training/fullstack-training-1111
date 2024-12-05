@@ -14,3 +14,25 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const dir = process.argv[2];
+const ext = '.' + process.argv[3];
+
+
+if(!dir || !ext) {
+    console.error('node hw1.js <directory> <extension>');
+    process.exit(1);
+}
+
+fs.readdir(dir, (err, files) => {
+    if(err) {
+        console.error(`Error reading dir: ${err.message}`)
+        process.exit(1);
+    }
+
+
+    files.filter(file => path.extname(file) === ext)
+         .forEach(file => console.log(file));
+})
