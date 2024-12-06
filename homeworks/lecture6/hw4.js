@@ -5,5 +5,18 @@
  * @param {number} num
  */
 function format(num) {
-  // your code here
+  const [int, decimal] = num.toString().split(".");
+  let res = [];
+  let curr = int;
+  while (curr > 0) {
+    const reminder = curr % 1000;
+    res.push(reminder);
+    curr = Math.floor(curr / 1000);
+  }
+  let intPart = res.reverse().join(",");
+  if (decimal) {
+    intPart += `.${decimal}`;
+  }
+
+  return intPart;
 }
