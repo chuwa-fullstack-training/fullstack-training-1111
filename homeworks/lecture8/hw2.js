@@ -42,3 +42,49 @@
  *  }
  * }
  */
+const express = require('express');
+const https = require('https');
+const app = express();
+
+const fetchData = (query) => {
+  return new Promise((resolve, reject) => {
+    const url = `https://hn.algolia.com/api/v1/search?query=${query}&tags=story`;
+    https.get(url, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        const jsonData = JSON.parse(data);
+        resolve(jsonData.hits[0]); 
+      });
+    }).on('error', (error) => {
+      reject(error.message);
+    });
+  });
+};
+
+app.get('/hw2', async (req, res) => {
+  const { query1, query2 } = req.query;
+  try {
+    const result1 = await fetchData(query1);
+    const result2 = await fetchData(query2);
+    const result = {
+      [query1]: {
+        created_at: result1.created_at,
+        title: result1.title,
+      },
+      [query2]: {
+        created_at: result2.created_at,
+        title: result2.title,
+      },
+    };
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
