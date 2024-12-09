@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title My Home Page
+  body
+    h1 Welcome to My Home Page
+    form(action="/create-post" method="post")
+      input(type="text" name="title" placeholder="Title" required)
+      input(type="text" name="content" placeholder="Content" required)
+      input(type="submit" value="Submit")
+    if title && content
+      h2 Submitted Data:
+      p
+        strong Title:
+        | #{title}
+      p
+        strong Content:
+        | #{content}
