@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +8,10 @@
 <body>
     <h1>Welcome to My Home Page</h1>
     <form action="/create-post" method="post">
-        <input type="text" name="title">
-        <input type="text" name="content">
-        <input type="submit" value="submit">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="content" placeholder="Content" required>
+        <input type="submit" value="Submit">
     </form>
+    {{dynamicContent}} 
 </body>
 </html>

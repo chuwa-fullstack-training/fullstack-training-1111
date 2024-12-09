@@ -14,30 +14,44 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-    const {url, method} = req;
-    if(method === 'GET') {
-        if(url === '/') {
+    const parsedUrl = url.parse(req.url, true); 
+    const pathname = parsedUrl.pathname; 
+    const { method } = req;
+
+    if (method === 'GET') {
+        if (pathname === '/') {
             res.end('this is the home page');
-        } else if(url === '/about') {
+        } else if (pathname === '/about') {
             res.end('this is the about page');
-        } else if(url.startsWith('/home.html')) {
-            fs.readFile(path.join(__dirname, 'home.html'), (err, html) => {
-                if(err) {
-                    res.end("error loading page")
+        } else if (pathname === '/home.html') {
+            fs.readFile(path.join(__dirname, 'home.html'), 'utf8', (err, html) => {
+                if (err) {
+                    res.end('Error loading page');
                 } else {
-                    res.writeHead(200, {'Content-Type': 'text/html'});
-                    res.write(html);
-                    res.end();
+                    const title = parsedUrl.query.title || null;
+                    const content = parsedUrl.query.content || null;
+
+                    const dynamicContent = title && content
+                        ? `<h2>Submitted Data:</h2>
+                           <p><strong>Title:</strong> ${title}</p>
+                           <p><strong>Content:</strong> ${content}</p>`
+                        : ''; 
+
+                    const updatedHtml = html.replace('{{dynamicContent}}', dynamicContent);
+
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.end(updatedHtml);
                 }
             });
         } else {
             res.end('404 Not Found');
         }
-    } else if(method === 'POST') {
-        if(url === '/create-post') {
+    } else if (method === 'POST') {
+        if (pathname === '/create-post') {
             let body = [];
             req.on('data', chunk => {
                 body.push(chunk);
@@ -46,30 +60,15 @@ const server = http.createServer((req, res) => {
                 const parsedBody = Buffer.concat(body).toString();
                 const formData = new URLSearchParams(parsedBody);
 
-                const newHtml = `
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>My Home Page</title>
-                    </head>
-                    <body>
-                        <h1>Welcome to My Home Page</h1>
-                        <form action="/create-post" method="post">
-                            <input type="text" name="title" placeholder="Title" required>
-                            <input type="text" name="content" placeholder="Content" required>
-                            <input type="submit" value="Submit">
-                        </form>
-                        <h2>Submitted Data:</h2>
-                        <p><strong>Title:</strong> ${formData.get('title')}</p>
-                        <p><strong>Content:</strong> ${formData.get('content')}</p>
-                    </body>
-                    </html>
-                `;
-                
-                res.writeHead(200, {'Content-Type': 'text/html'});
-                res.end(newHtml);
+                const title = formData.get('title');
+                const content = formData.get('content');
+
+                res.statusCode = 302;
+                res.setHeader(
+                    'Location',
+                    `/home.html?title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}`
+                );
+                res.end();
             });
         } else {
             res.end('404 Not Found');
@@ -81,4 +80,4 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-})
+});
