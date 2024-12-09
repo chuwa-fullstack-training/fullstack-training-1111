@@ -9,3 +9,16 @@
  *    You don't need to handle the case like http://localhost:3000/hw1/test/test/txt.
  * 3. hw2 should be able to handle requests with query strings like it did in lecture 7;
  */
+
+const express = require('express')
+const app = express()
+
+const readDirRouter = require('./readDir.js')
+const getTimeRouter = require('./getTime.js')
+
+app.use('/hw1', readDirRouter)
+app.use('/api', getTimeRouter)
+
+app.listen(3000, () => {
+    console.log('Listening on port 3000!')
+})

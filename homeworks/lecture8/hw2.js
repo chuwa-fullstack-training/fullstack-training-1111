@@ -42,3 +42,63 @@
  *  }
  * }
  */
+
+const express = require('express')
+const app = express()
+const https = require('https')
+
+const makeRequest = (url) => {
+    return new Promise((resolve, reject) => {
+        https.get(url, (res) => {
+            let data = ''
+            res.on('data', (chunk) => {
+                data += chunk
+            })
+            
+            res.on('end', () => {
+                try{
+                    resolve(JSON.parse(data))
+                } catch(err) {
+                    reject(err.message)
+                }
+            })
+
+        })
+        .on('error', (err) => {
+            reject(err.message)
+        })
+    })
+   
+}
+
+app.get('/hw2', async (req, res) => {
+    const { query1, query2 } = req.query 
+    const url = 'https://hn.algolia.com/api/v1/search'
+
+    try{
+        const { hits: hits1 } = await makeRequest(`${url}?query=${query1}&tags=story`)
+        const { hits: hits2 } = await makeRequest(`${url}?query=${query2}&tags=story`)
+
+        let result1 = hits1.reduce((accum, obj) => {
+            accum.push({ title: obj.title, author: obj.author, createdAt: obj.created_at })
+            return accum
+        }, [])
+
+        let result2 = hits2.reduce((accum, obj) => {
+            accum.push({ title: obj.title, author: obj.author, createdAt: obj.created_at })
+            return accum
+        }, [])
+
+        res.json({ [query1]: result1, [query2]: result2 })
+
+        
+    } catch(err){
+        res.send(err.message)
+    }
+
+})
+
+
+app.listen(3000, () => {
+    console.log('hw2 router listening on port 3000!')
+})
