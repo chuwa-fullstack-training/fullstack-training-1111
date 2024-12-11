@@ -37,7 +37,7 @@ router.put('/update-company-by-Id', async (req, res) => {
     
     if(companyId){
         try {
-            const company = await Company.findoneAndUpdate({ _id: companyId }, { ...rest })
+            const company = await Company.findoneAndUpdate({ _id: companyId }, rest )
             if(!company){
                 res.status(404).json({ message: "No company found"})
             }
