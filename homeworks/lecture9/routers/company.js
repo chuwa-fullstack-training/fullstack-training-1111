@@ -13,7 +13,7 @@ router.post('/create-company', async (req, res) => {
     }
 })
 
-router.get('/get-company-by-Id', async (req, res) => {
+router.get('/get-company-by-id', async (req, res) => {
     const { companyId } = req.body;
     
     if (companyId){
@@ -32,7 +32,7 @@ router.get('/get-company-by-Id', async (req, res) => {
     } 
 })
 
-router.put('/update-company-by-Id', async (req, res) => {
+router.put('/update-company-by-id', async (req, res) => {
     const { companyId, ...rest } = req.body
     
     if(companyId){
@@ -52,7 +52,7 @@ router.put('/update-company-by-Id', async (req, res) => {
     }
 })
 
-router.delete('/delete-company-by-Id', async (req, res) => {
+router.delete('/delete-company-by-id', async (req, res) => {
     const { companyId } = req.body;
 
     if(companyId){

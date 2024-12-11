@@ -14,7 +14,7 @@ router.post('/create-employee', async (req, res) => {
         res.status(401).json({ message: "Error occured while creating this employee"})
     }
 })
-router.get('/get-employee-by-Id', async (req, res) => {
+router.get('/get-employee-by-id', async (req, res) => {
     const { employeeId } = req.body;
     
     if (employeeId){
@@ -33,7 +33,7 @@ router.get('/get-employee-by-Id', async (req, res) => {
     } 
 })
 
-router.put('/update-employee-by-Id', async (req, res) => {
+router.put('/update-employee-by-id', async (req, res) => {
     const { employeeId, ...rest } = req.body
     
     if(employeeId){
@@ -53,7 +53,7 @@ router.put('/update-employee-by-Id', async (req, res) => {
     }
 })
 
-router.delete('/delete-employee-by-Id', async (req, res) => {
+router.delete('/delete-employee-by-id', async (req, res) => {
     const { employeeId } = req.body;
 
     if(employeeId){
