@@ -32,7 +32,8 @@ const employeeSchema = new Schema({
     },
     company: {
         type: Schema.Types.ObjectId,
-        ref: 'Company'
+        ref: 'Company',
+        required: true
     },
     startDate: Date,
     jobTitle: String,
@@ -40,7 +41,8 @@ const employeeSchema = new Schema({
     salary: Number,
     manager: {
         type: Schema.Types.ObjectId,
-        ref: 'Employee'
+        ref: 'Employee',
+        default: null
     }
 })
 
