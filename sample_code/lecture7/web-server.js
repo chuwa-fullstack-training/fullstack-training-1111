@@ -1,9 +1,11 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 
 const server = http.createServer((req, res) => {
   const { url, method } = req;
+
   if (method === 'GET') {
     if (url === '/') {
       res.end('this is the home page');
@@ -30,7 +32,13 @@ const server = http.createServer((req, res) => {
       });
       req.on('end', () => {
         const parsedBody = Buffer.concat(body).toString();
-        res.end(parsedBody);
+        const params = new URLSearchParams(parsedBody);
+
+        //Redirect
+        const redirectUrl = `/home.html?name=${params.get('name')}&age=${params.get('age')}`;
+        res.statusCode = 302;
+        res.setHeader('Location', redirectUrl);
+        res.end();
       });
     } else {
       res.end('this is the 404 page');

@@ -8,9 +8,24 @@
 <body>
     <h1>Welcome to Nodejs tutorial</h1>
     <form action="/create-post" method="post">
-        <input type="text" name="title">
-        <input type="text" name="content">
+        <input type="text" name="name">
+        <input type="text" name="age">
         <input type="submit" value="submit">
     </form>
+
+    <h1>Submitted Data:</h1>
+    <p id="name"></p>
+    <p id="age"></p>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const age = urlParams.get('age');
+
+        if (name || age) {
+            document.getElementById('name').textContent = `name: ${name || ''}`;
+            document.getElementById('age').textContent = `age: ${age || ''}`;
+        }
+    </script>
 </body>
 </html>
