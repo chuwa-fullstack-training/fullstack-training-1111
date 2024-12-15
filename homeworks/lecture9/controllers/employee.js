@@ -4,6 +4,11 @@ exports.createEmployee = async (req, res) => {
   try {
     const employee = new Employee(req.body);
     await employee.save();
+    
+    const company = await Company.findById(employee.company);
+    company.employees.push(employee._id);
+    await company.save();
+
     res.status(201).json(employee);
   } catch (err) {
     console.log(err)
