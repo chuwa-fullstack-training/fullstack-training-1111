@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const server = http.createServer((req, res) => {
-  const { url, method } = req;
+  const {url, method} = req;
   if (method === 'GET') {
     if (url === '/') {
       res.end('this is the home page');
@@ -14,7 +14,7 @@ const server = http.createServer((req, res) => {
         if (err) {
           res.end('error');
         } else {
-          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.writeHead(200, {'Content-Type': 'text/html'});
           res.write(html);
           res.end();
         }
@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
   } else if (method === 'POST') {
     if (url === '/create-post') {
       let body = [];
-      req.on('data', chunk => {
+      req.on('data', (chunk) => {
         body.push(chunk);
       });
       req.on('end', () => {
