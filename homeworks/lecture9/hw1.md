@@ -30,3 +30,5 @@ The Employee schema should have the following fields:
 - resigned: Boolean
 - salary: Number
 - _manager: EmployeeSchema_ (optional)
+
+

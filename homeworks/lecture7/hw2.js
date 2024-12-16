@@ -19,3 +19,48 @@
  */
 
 // your code here
+const http = require("http");
+const url = require("url");
+
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+  const isoTime = parsedUrl.query.iso;
+
+  if (!isoTime) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Missing iso query parameter" }));
+    return;
+  }
+
+  const date = new Date(isoTime);
+
+  if (isNaN(date.getTime())) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Invalid ISO time format" }));
+    return;
+  }
+
+  if (pathname === "/api/parsetime") {
+    const timeData = {
+      hour: date.getUTCHours(),
+      minute: date.getUTCMinutes(),
+      second: date.getUTCSeconds(),
+    };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(timeData));
+  } else if (pathname === "/api/unixtime") {
+    const unixTimeData = {
+      unixtime: date.getTime(),
+    };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(unixTimeData));
+  } else {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Not Found" }));
+  }
+});
+
+server.listen(8000, () => {
+  console.log("Server is listening on port 8000");
+});
