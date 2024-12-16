@@ -19,3 +19,52 @@
  */
 
 // your code here
+const http = require('http');
+const url = require('url');
+
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+  const query = parsedUrl.query;
+
+  if (!query.iso) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'iso parameter is required' }));
+    return;
+  }
+
+  const isoDate = new Date(query.iso);
+
+  if (isNaN(isoDate)) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Invalid ISO date' }));
+    return;
+  }
+
+  if (pathname === '/api/parsetime') {
+    const responseObj = {
+      hour: isoDate.getHours(),
+      minute: isoDate.getMinutes(),
+      second: isoDate.getSeconds(),
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(responseObj));
+  }
+  
+  else if (pathname === '/api/unixtime') {
+    const responseObj = {
+      unixtime: isoDate.getTime(),
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(responseObj));
+  }
+
+  else {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Not Found' }));
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
+});

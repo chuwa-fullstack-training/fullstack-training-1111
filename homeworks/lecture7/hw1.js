@@ -14,3 +14,21 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const directoryPath = process.argv[2];
+const extensionFilter = '.' + process.argv[3]; 
+
+fs.readdir(directoryPath, (err, files) => {
+  if (err) {
+    console.error('Error reading directory:', err);
+    return;
+  }
+
+  files.forEach(file => {
+    if (path.extname(file) === extensionFilter) {
+      console.log(file);
+    }
+  });
+});
