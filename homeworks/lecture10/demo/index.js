@@ -22,6 +22,7 @@ app.set('views', './views');
 app.get('/', async (req, res) => {
   try {
     const todos = await Todo.find()
+    console.log(todos)
     res.render('index', { todos });
   } catch(err){
     console.log(err.message)
