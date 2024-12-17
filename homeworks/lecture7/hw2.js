@@ -19,3 +19,53 @@
  */
 
 // your code here
+const http = require("http");
+const url = require("url");
+
+function handleParseTime(req, res) {
+  try {
+    const { query } = url.parse(req.url, true);
+    const date = new Date(query.iso);
+    const response = {
+      hour: date.getHours(),
+      minute: date.getMinutes(),
+      second: date.getSeconds(),
+    };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(response));
+  } catch (err) {
+    console.error(err);
+    res.writeHead(500, { "Content-Type": "text/plain" });
+    res.end("Internal Server Error");
+  }
+}
+
+function handleUnixTime(req, res) {
+  try {
+    const { query } = url.parse(req.url, true);
+    const unixtime = Date.parse(query.iso);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ unixtime }));
+  } catch (err) {
+    console.error(err);
+    res.writeHead(500, { "Content-Type": "text/plain" });
+    res.end("Internal Server Error");
+  }
+}
+
+const server = http.createServer((req, res) => {
+  const { pathname } = url.parse(req.url);
+  switch (pathname) {
+    case "/api/parsetime":
+      handleParseTime(req, res);
+      break;
+    case "/api/unixtime":
+      handleUnixTime(req, res);
+      break;
+    default:
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Not Found");
+  }
+});
+const port = process.env.PORT || 3000;
+server.listen(port);

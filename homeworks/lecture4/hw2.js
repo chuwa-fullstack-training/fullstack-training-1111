@@ -24,10 +24,6 @@ array.map((value) => value % 2 === 0);
 
 // 3
 function reverseString(str) {
-  return str.split("").reverse().join("");
-}
-
-function reverseString(str) {
   return str.split("").reduce((reversed, s) => s + reversed, "");
 }
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>this is home page</h1>
+    <div>
+    <form method="POST" action="/submit" >
+        <div><label for="user">User</label>
+        <input id="user" name="user" type="text" required></input>
+        </div>
+        <div><label for="email">Email</label>
+        <input id="email" name="email" type="email" required></input></div>
+        <div><input type="submit" value="Submit"></input></div>
+
+    </form>
+    </div>
+    <div id="submittedData"></div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.toString()) {
+            const submittedData = Array.from(params.entries())
+                .map(([key, value]) => `<p>${key}: ${value}</p>`)
+                .join("");
+            document.getElementById("submittedData").innerHTML = `
+                <h3>Submitted Data:</h3>${submittedData}
+            `;
+        }
+    </script>
+  </body>
+</html>

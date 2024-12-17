@@ -17,7 +17,7 @@
  *   ...
  *   }
  * ]}
- * 
+ *
  * result from https://hn.algolia.com/api/v1/search?query=banana&tags=story:
  * {
  *  "hits": [
@@ -27,7 +27,7 @@
  *   ...
  *   }
  * ]}
- * 
+ *
  * final result from http://localhost:3000/hw2?query1=apple&query2=banana:
  * {
  *   "apple":

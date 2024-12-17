@@ -1,7 +1,7 @@
 /**
  * For sample code web-server.js, make the following changes:
  * Once submitting in home.html, stay on the same page and display the submitted data.
- * 
+ *
  * Hint:
  * 1. put the data of the submitted form in the query string of the url
  * 2. before res.end() in POST method, redirect to the home.html page with the query string
