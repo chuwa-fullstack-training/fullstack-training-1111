@@ -17,7 +17,7 @@ router.post('/', verifyToken, async (req, res) => {
             res.status(401).json({ message: "Error occured while creating this employee"})
         }
     } else {
-        res.status(403),json({ message: "Not Authorized"})
+        res.status(403).json({ message: "Not Authorized"})
     }
     
 })
@@ -58,7 +58,7 @@ router.put('/:id',  verifyToken, async (req, res) => {
             res.status(400).json({ error: err.messsage })
         }
     } else {
-        res.status(403),json({ message: "Not Authorized"})
+        res.status(403).json({ message: "Not Authorized"})
     }
 
 })
@@ -82,28 +82,26 @@ router.delete('/:id', verifyToken,  async (req, res) => {
             res.status(400).json({ error: err.messsage })
         }
     } else {
-        res.status(403),json({ message: "Not Authorized"})
+        res.status(403).json({ message: "Not Authorized"})
     }
 
 })
 
 router.get('/', verifyToken, async (req, res) => {
-    try {
-        let employees = await Employee.find()
-        
-        if(!req.isAuthorized){
-            employees = employees.map(e => ({ firstName: e.firstName, lastName: e.lastName }))
-        } else {
+    
+    if(req.isAuthorized){
+        try {
+            let employees = await Employee.find()
             const user = await Employee.findOne({ _id: req.user })
             employees = employees.filter( e => e.company.toString() === user.company.toString() )
+            res.status(200).json({ employees })
+        } catch(err){
+            console.log('Error occured')
+            res.status(400).json({ error: err.messsage })
         }
-        
-        res.status(200).json({ employees })
-
-    } catch(err){
-        console.log('Error occured')
-        res.status(400).json({ error: err.messsage })
-    }
+    } else {
+        res.status(403).json({ message: "Not Authorized"})
+    }  
 })
 
 module.exports = router;
