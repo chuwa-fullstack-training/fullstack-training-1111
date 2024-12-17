@@ -1,35 +1,29 @@
 const express = require('express');
+const todoRouter = require('./routers/middleware');
+const connectDB = require('./db');
+const { Todo } = require('./apis/Schema');
 
 const app = express();
 
-app.use(express.static('public'));
+connectDB();
+
+// app.use(express.static('public'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-const todos = [
-  { id: 1, todo: 'first thing', done: true },
-  { id: 2, todo: 'second thing', done: false },
-  { id: 3, todo: 'third thing', done: false }
-];
+app.use('/api', todoRouter);
 
-app.get('/', (req, res) => {
-  res.render('index', { todos });
-});
-
-app.post('/api/todos', (req, res) => {
-  const todo = req.body.todo;
-  todos.push({ id: todos.length + 1, todo, done: false });
-  res.json(todos);
-});
-
-app.put('/api/todos/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const todo = todos.find(t => t.id === id);
-  todo.done = !todo.done;
-  res.json(todo);
+app.get('/', async (req, res) => {
+  try {
+    const todos = await Todo.find();
+    res.render('index', { todos });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 app.listen(3000, () => {

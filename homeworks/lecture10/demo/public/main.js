@@ -12,12 +12,12 @@ function handleCheck(ele) {
 function handleSubmit() {
   const todo = document.querySelector('#todo').value;
   if (!todo) return alert('Please enter a todo');
-  fetch('/api/todos', {
+  fetch('/api/todo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ todo })
+    body: JSON.stringify({ content: todo })
   })
     .then(res => res.json())
     .then(data => {
