@@ -9,3 +9,5 @@
  * 3. you need to figure out how to parse the query string in the home.html page
  * 4. after writing the html content, you need to write the query string in the html as well
  */
+
+// see folder hw3

@@ -1,0 +1,28 @@
+.wrapper {
+  display: grid;
+  grid-template-areas: "header" "nav" "aside section" "footer";
+  grid-template-columns: 100px 1fr 100px;
+  grid-template-rows: 60px 1fr 100px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.header {
+  grid-area: "header";
+}
+
+.nav {
+  grid-area: "nav";
+}
+
+.aside {
+  grid-area: "aside";
+}
+
+.section {
+  grid-area: "section";
+}
+
+.footer {
+  grid-area: "footer";
+}
