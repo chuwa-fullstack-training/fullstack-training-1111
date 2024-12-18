@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "name": "hw3",
+  "version": "1.0.0",
+  "main": "hw3.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -19,3 +19,41 @@
  */
 
 // your code here
+const http = require('http');
+const url = require('url');
+
+const server = http.createServer((req, res) => {
+    const parseURL = url.parse(req.url, true);
+    const {pathname, query } = parseURL;
+    const isoTime = query.iso
+
+    if (!isoTime) {
+        res.writeHead(400, { contentType: 'application/json'});
+        res.end(JSON.stringify({ error: 'Please provide an ISO 8601 date' }));
+        return;
+    }
+
+    const date = new Date(isoTime);
+    if (pathname == '/api/parsetime') {
+        const result = {
+            hour: date.getUTCHours(),
+            minute: date.getUTCMinutes(),
+            second: date.getUTCSeconds()
+        };
+        res.writeHead(200, { contentType: 'application/json' });
+        res.end(JSON.stringify(result));
+    } else if (pathname == '/api/unixtime') {
+        const result = {
+            unixtime: date.getTime()
+        };
+        res.writeHead(200, { contentType: 'application/json' });
+        res.end(JSON.stringify(result));
+    } else {
+        res.writeHead(404, { contentType: 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid request' }));
+    }
+})
+
+server.listen(3000, () => {
+    console.log('Server is running on port 3000');
+  });

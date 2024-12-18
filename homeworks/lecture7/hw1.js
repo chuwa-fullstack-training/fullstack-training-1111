@@ -14,3 +14,23 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const dirName = process.argv[2];
+const extFilter = process.argv[3];
+console.log(process.argv) // for testing purpose, you can uncomment this line and see the command-line arguments in the console.
+console.log(dirName, extFilter)
+
+if (!dirName || !extFilter){
+    console.error('Usage: node <script> <directory> <extension>');
+    process.exit(1);
+}
+fs.readdir(dirName,(err, files) => {
+    if (err) {
+        console.error(`Error reading directory: ${dirName}`);
+        process.exit(1);
+    }
+    files.filter(file => path.extname(file) === extFilter)
+    .forEach(file => console.log(file));  // exit the program with success status code 0 when all files have been processed.
+});
