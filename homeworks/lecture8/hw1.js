@@ -9,3 +9,20 @@
  *    You don't need to handle the case like http://localhost:3000/hw1/test/test/txt.
  * 3. hw2 should be able to handle requests with query strings like it did in lecture 7;
  */
+
+const express = require('express');
+const fs = require('fs');
+
+const app = express();
+const port = 3000;
+
+const hw1Router = require('./hw1routers/hw1');
+const hw2Router = require('./hw1routers/hw2');
+
+app.use('/', hw1Router);
+app.use('/', hw2Router);
+app.use('*', (req, res) => {
+  res.send('404 Not Found');
+})
+
+app.listen(port, () => console.log(`Server is running on port ${port}`));
