@@ -61,8 +61,24 @@ const createCompany = async (req, res) => {
 
 const getCompanyById = async (req, res) => {
     try {
-        const company = await Company.findById(req.params?.id);
-        res.status(200).json(company);
+        const company = await Company.findById(req.params?.id).populate('employees', 'firstName lastName');
+
+        if (!company) {
+            return res.status(404).json({ message: 'Company not found'});
+        }
+
+        // Check if employee is authenticated
+        if (req.employee) {
+            // Check if employee is accessing their own company's information
+            if (req.employee.company.toString() === company.id) {
+                return res.status(200).json(company);
+            }
+        } else {
+            return res.status(403).json({ name: company.name })
+        }
+
+        // Unauthenticated login
+        return res.status(200).json({ name: company.name })
     } catch (error) {
         res.status(500).json({ message: 'Server Error' });
     }
@@ -71,7 +87,29 @@ const getCompanyById = async (req, res) => {
 const getEmployeeById = async (req, res) => {
     try {
         const employee = await Employee.findById(req.params?.id);
-        res.status(200).json(employee);
+        
+        if (!employee) {
+            return res.status(404).json({ message: 'Employee not found' });
+        }
+
+        // Check if authenticated
+        if (req.employee) {
+            if (req.employee.id === employee.id) {
+                return res.status(200).json(employee);
+            } else {
+                // Limited data for query to someone else's information
+                return res.status(403).json({
+                    firstname: employee.firstName,
+                    lastname: employee.lastName,
+                })
+            }
+        } else {
+            // Unauthenticated login
+            return res.status(200).json({
+                firstname: employee.firstName,
+                lastname: employee.lastName,
+            })
+        }
     } catch (error) {
         res.status(500).json({ message: 'Server Error' });
     }

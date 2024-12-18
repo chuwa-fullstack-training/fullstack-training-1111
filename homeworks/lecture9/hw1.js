@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Router = require('./middleware');
+const authRouter = require('./auth');
 
 const app = express();
 const PORT = 3000;
-const URI = "mongodb+srv://jianganchen:3O8CeMMU2eBC10TV@cluster0.luyah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+require('dotenv').config();
 
 // Connect to Database
 mongoose
-    .connect(URI, {
+    .connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -22,6 +23,7 @@ mongoose
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use('/auth', authRouter);
 app.use('/api', Router);
 
 app.listen(PORT, () => {
