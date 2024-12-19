@@ -14,3 +14,19 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+directory = process.argv[2];
+extension = process.argv[3];
+
+fs.readdir(directory, (err, files) => {
+    if (err)
+        console.log(err);
+    else {
+        const filesext = files.filter(file => {
+            return path.extname(file).substring(1) === extension;
+        });
+        filesext.forEach(file => console.log(file));
+    }
+});

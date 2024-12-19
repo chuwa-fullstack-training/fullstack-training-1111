@@ -42,3 +42,30 @@
  *  }
  * }
  */
+
+const express = require('express');
+const https = require('https');
+const app = express();
+
+app.get('/hw2', (req, res) => {
+    const query1 = req.query.query1;
+    const query2 = req.query.query2;
+
+    const result = {};
+    fetch('https://hn.algolia.com/api/v1/search?query=' + query1 + '&tags=story')
+    .then((res) => res.json())
+    .then((reshits) => {
+        result[query1] = reshits['hits'][0];
+        fetch('https://hn.algolia.com/api/v1/search?query=' + query2 + '&tags=story')
+        .then((res) => res.json())
+        .then((reshits) => {
+            result[query2] = reshits['hits'][0];
+            res.writeHead(200, { contentType: 'application/json' })
+            res.end(JSON.stringify({ result: result}));
+        });
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Example app listening on port 3000!');
+});

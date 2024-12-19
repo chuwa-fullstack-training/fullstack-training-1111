@@ -19,3 +19,35 @@
  */
 
 // your code here
+
+const http = require('http');
+var url = require("url");
+const PORT = 3000;
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'GET') {
+    const searchParam = url.parse(req.url).search;
+    if (url.parse(req.url).pathname === '/api/parsetime') {
+      if (searchParam) {
+        const time = searchParam.split('=')[1].substring(11);
+        res.writeHead(200, { contentType: 'application/json' })
+        res.end(JSON.stringify({ hour: time.split(':')[0], minute: time.split(':')[1], second: time.split(':')[2].substring(0, 2) }));
+      } else {
+        res.end('Unsupported method');
+      }
+    } else if (url.parse(req.url).pathname === '/api/unixtime') {
+      if (searchParam) {
+        res.writeHead(200, { contentType: 'application/json' })
+        res.end(JSON.stringify({ unixtime: new Date(searchParam.split('=')[1]).getTime()}));
+      } else {
+        res.end('Unsupported method');
+      }
+    }
+   } else {
+    res.end('Unsupported method');
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

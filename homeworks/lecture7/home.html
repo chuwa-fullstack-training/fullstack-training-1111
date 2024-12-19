@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Home Page</title>
+    <script>
+    function getParams() {
+        var params = [],
+            pairs = document.URL.split('?')
+                   .pop()
+                   .split('&');
+    
+        for (var i = 0, p; i < pairs.length; i++) {
+               p = pairs[i].split('=');
+               params.push(p[1]);
+        }     
+        return params;
+    }
+    window.onload = function() {
+        const params = getParams();
+        if (params.length && params[0]) {
+            document.body.insertAdjacentHTML("afterbegin", "<div>" + params[0] + " " + params[1] + "</div>");
+        }
+    }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Nodejs tutorial</h1>
+    <form action="/create-post" method="post">
+        <input type="text" name="title">
+        <input type="text" name="content">
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
