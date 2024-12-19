@@ -14,3 +14,19 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+const directory = process.argv[2];
+const extensionFilter = process.argv[3];
+if(!directory||!extensionFilter){
+    console.error('error');
+    process.exit(1);
+}
+fs.readdir(directory,(err,files)=>{
+    if(err){
+        console.error(`err reading dictory: ${err.message}`);
+        process.exit(1);
+    }
+    const filteredFiles = files.filter(file => path.extname(file) === `.${extensionFilter}`);
+    filteredFiles.forEach(file => console.log(file));
+})

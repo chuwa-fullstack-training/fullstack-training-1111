@@ -19,3 +19,51 @@
  */
 
 // your code here
+const http = require('http');
+const url = require('url');
+
+function parseTime(isoTime) {
+  const date = new Date(isoTime);
+  return {
+    hour: date.getUTCHours(),
+    minute: date.getUTCMinutes(),
+    second: date.getUTCSeconds(),
+  };
+}
+
+function unixTime(isoTime) {
+  const date = new Date(isoTime);
+  return {
+    unixtime: date.getTime(),
+  };
+}
+
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url, true); 
+  const pathname = parsedUrl.pathname; 
+  const isoTime = parsedUrl.query.iso; 
+
+  if (!isoTime) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Missing "iso" query parameter' }));
+    return;
+  }
+
+  if (pathname === '/api/parsetime') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(parseTime(isoTime)));
+  } else if (pathname === '/api/unixtime') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(unixTime(isoTime)));
+  } else {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Invalid endpoint or query parameter' }));
+  }
+});
+
+
+const PORT = 8000;
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+

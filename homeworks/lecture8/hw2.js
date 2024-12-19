@@ -42,3 +42,21 @@
  *  }
  * }
  */
+const express = require('express');
+const hw2Router = require('./routers/hw2SearchRouter');
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/', hw2Router);
+
+app.get('/', (req, res) => {
+  res.send('Welcome to Homework 2 Express Application');
+});
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
