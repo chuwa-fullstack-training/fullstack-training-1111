@@ -7,18 +7,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://localhost/todo-list', {
+
+const dbURI = 'mongodb+srv://arvinnliutc:liu@123.com@firsttry.guiff.mongodb.net/?retryWrites=true&w=majority&appName=FirstTry';
+
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
-  console.log('MongoDB connected');
-}).catch(err => {
-  console.log('MongoDB connection error:', err);
-});
-
-const todoRoutes = require('./routes/todoRoutes');
-app.use('/', todoRoutes);
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+})
+.then(() => {
+  console.log('MongoDB connected successfully');
+})
+.catch((err) => {
+  console.error('MongoDB connection error:', err);
 });
