@@ -1,0 +1,36 @@
+.counter-container {
+  max-width: 200px;
+  margin: 1rem auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.button-row button,
+.reset-row button {
+  background-color: #999;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-row button:hover,
+.reset-row button:hover {
+  background-color: #666;
+}
+
+.count-display {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.reset-row {
+  margin-top: 1rem;
+}

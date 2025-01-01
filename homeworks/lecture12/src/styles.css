@@ -1,0 +1,101 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  /* display: flex; */
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 10px;
+
+  grid-template-areas:
+    "header header"
+    "nav nav"
+    "aside section"
+    "typeip typeip"
+    "footer footer";
+  min-height: 50vh;
+  margin: 0;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+header {
+  grid-area: header;
+  background-color: #e6e94d;
+  padding: 80px;
+  text-align: center;
+}
+
+nav {
+  grid-area: nav;
+  background-color: #eee;
+  padding: 10px;
+}
+
+aside {
+  grid-area: aside;
+  background-color: #ccc;
+  padding: 10px;
+}
+
+section {
+  grid-area: section;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+typeip {
+  grid-area: typeip;
+  background-color: #ddd;
+  padding: 10px;
+  align-items: center;
+}
+footer {
+  grid-area: footer;
+  background-color: #85b4cf;
+  padding: 10px;
+  text-align: center;
+}
+
+/* // counter */
+/* 
+.counter-container {
+  max-width: 400px;
+  margin: 1rem auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.button-row button,
+.reset-row button {
+  background-color: #999;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-row button:hover,
+.reset-row button:hover {
+  background-color: #666;
+}
+
+.count-display {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.reset-row {
+  margin-top: 1rem;
+} */
