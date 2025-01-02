@@ -1,0 +1,27 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    gap: 14px;
+  }
+  
+  .button {
+    min-height: 50px;
+    min-width: 100px;
+    background: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    font-size: large;
+  }
+  
+  .result {
+    font-size: xx-large;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+  

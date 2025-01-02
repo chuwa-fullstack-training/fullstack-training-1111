@@ -1,0 +1,15 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  input {
+    height: 25px;
+    border: 1px solid lightgray;
+    border-radius: 10%
+  }
+  
+  input:focus {
+    outline-color: rgb(6, 14, 17);
+  }
+  
