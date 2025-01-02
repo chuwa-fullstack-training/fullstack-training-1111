@@ -1,0 +1,57 @@
+.phone {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    height: 900px;
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .screen {
+    height: 75%;
+    width: 90%;
+    border: 1px solid gray;
+  }
+  
+  .statusBar {
+    height: 8%;
+    background-color: #add7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+  }
+  
+  .buttonGrid {
+    height: 92%;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    background: linear-gradient(to bottom, #87bfff 78%, #2667ff 22%);
+    /* background-color: #b9d9eb; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .buttonGrid > :nth-child(n + 17) {
+    margin-top: 25px;
+  }
+  
+  .button {
+    border: none;
+    border-radius: 15px;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  
+  .activeButton {
+    border: none;
+    border-radius: 15px;
+    font-size: 35px;
+    cursor: pointer;
+    color: red;
+  }
+  
