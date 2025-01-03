@@ -13,5 +13,5 @@ const UserListItem = ({ user, setDisplayUser }) => {
     );
   };
   
-  export default UserListItem;
+export default UserListItem;
   
