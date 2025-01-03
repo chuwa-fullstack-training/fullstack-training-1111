@@ -1,0 +1,106 @@
+.page {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+  
+.grid-table {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 10px;
+}
+
+.columnName {
+color: gray;
+text-align: center;
+font-weight: 600;
+}
+
+.userListItem {
+grid-column: span 3;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+place-items: center;
+border-bottom: 1px solid lightgray;
+padding: 5px;
+}
+
+.userListItem:hover {
+cursor: pointer;
+}
+
+.userCardContainer {
+margin-top: 200px;
+max-height: 350px;
+border-radius: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.userCard {
+display: flex;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+padding: 40px;
+justify-content: space-between;
+gap: 20px;
+}
+
+.avatar {
+max-width: 80px;
+grid-column: 1;
+border-radius: 50%;
+margin: 15px;
+}
+
+.userAvatar {
+width: 130px;
+height: 130px;
+border-radius: 50%;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.userAvatar img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.userBio {
+display: flex;
+flex-direction: column;
+gap: 5px;
+font-family: "Courier New", Courier, monospace;
+}
+
+.userBio .name {
+font-size: large;
+font-weight: 800;
+}
+
+.userBio .location {
+font-size: large;
+}
+
+.userBio li {
+margin-bottom: 8px;
+}
+
+.userBio liL:last-child {
+margin-bottom: 0px;
+}
+
+.repoName {
+font-size: large;
+font-weight: 800;
+color: cornflowerblue;
+}
+
+.repoDescription {
+max-width: 650px;
+}
+  
