@@ -5,6 +5,28 @@ interface Todo {
   completed: boolean;
 }
 
+interface TodoListProps {
+  todos: Todo[];
+  toggleTodo: (index: number) => void;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ todos, toggleTodo }) => {
+  return (
+    <ul>
+      {todos.map((todos, index) => (
+        <li key={index}>
+          <input
+            type="checkbox"
+            checked={todos.completed}
+            onChange={() => toggleTodo(index)}
+          />
+          {todos.text}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const App = () => {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -60,18 +82,7 @@ const App = () => {
           Clear Completed Todos
         </button>
       </div>
-      <ul>
-        {todos.map((todos, index) => (
-          <li key={index}>
-            <input
-              type="checkbox"
-              checked={todos.completed}
-              onChange={() => toggleTodo(index)}
-            />
-            {todos.text}
-          </li>
-        ))}
-      </ul>
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
     </div>
   );
 };
