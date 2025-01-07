@@ -6,7 +6,7 @@ import UserList from "./UserList";
 import UserDetails from "./UserDetails";
 import ProtectedRoute from "./ProtectedRoute";
 
-import './index.css'
+import './app.css'
 
 const App = () => {
   return (
