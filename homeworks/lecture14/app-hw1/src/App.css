@@ -1,7 +1,6 @@
-.layout-container {
-  display: flex;
-  height: 100vh;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .table-container {
   flex: 1;
@@ -79,4 +78,10 @@ img {
 
 .profile-card ul li a:hover {
   text-decoration: underline;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }
