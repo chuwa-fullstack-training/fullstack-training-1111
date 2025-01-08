@@ -1,17 +1,30 @@
-import React from "react";
+import React, {useEffect } from "react";
 import "./app.css";
 import TodoItem from "./TodoItem";
 import { useSelector, useDispatch } from "react-redux"
-import { actions } from "./features/todoListSlice"
+import { actions, fetchTodos } from "./features/todoListSlice"
+
 
 const App = () => {
   const inputVal = useSelector(state => state.inputVal)
   const todos = useSelector(state => state.todos)
-  const isAllDone = useSelector(state => state.isAllDone)
-  
+  const status = useSelector(state => state.status)
+  const error = useSelector(state => state.error)
   const dispatch = useDispatch()
+  // const isAllDone = useSelector(state => state.isAllDone)
 
-  let remaining = todos.filter((item) => !item.isCompleted).length;
+  console.log(todos)
+
+  useEffect(() => {
+    if(status === 'idle'){
+      dispatch(fetchTodos())
+    }
+  }, [status, dispatch]) // ?dispatch
+
+  
+
+
+  // let remaining = todos.filter((item) => !item.isCompleted).length;
 
   const handleAddTodoItem = (e) => {
     if (e.key === "Enter") {
@@ -31,17 +44,17 @@ const App = () => {
     dispatch(actions.updateTodos(newTodos))
   };
 
-  const toggleAllDone = () => {
-    const newTodos = todos.map((item) => ({ ...item, isCompleted: !isAllDone }))
-    dispatch(actions.updateTodos(newTodos))
-    dispatch(actions.updateIsAllDone(!isAllDone))
-  };
+  // const toggleAllDone = () => {
+  //   const newTodos = todos.map((item) => ({ ...item, isCompleted: !isAllDone }))
+  //   dispatch(actions.updateTodos(newTodos))
+  //   dispatch(actions.updateIsAllDone(!isAllDone))
+  // };
 
-  const handleClear = () => {
-    const newTodos = todos.map((item) => ({ ...item, isCompleted: false }))
-    dispatch(actions.updateTodos(newTodos))
-    dispatch(actions.updateIsAllDone(false))
-  };
+  // const handleClear = () => {
+  //   const newTodos = todos.map((item) => ({ ...item, isCompleted: false }))
+  //   dispatch(actions.updateTodos(newTodos))
+  //   dispatch(actions.updateIsAllDone(false))
+  // };
 
   return (
     <div className="page">
@@ -53,12 +66,12 @@ const App = () => {
         onChange={(e) => dispatch(actions.setInput(e.target.value))}
         onKeyDown={handleAddTodoItem}
       />
-      <div className="status">
-        <p>{remaining} remaining</p>
-        <button onClick={handleClear}>Clear Completed Todos</button>
-      </div>
-      <div>
-        <div className="allDone">
+      {/* <div className="status">
+        <p>{remaining} remaining</p> */}
+        {/* <button onClick={handleClear}>Clear Completed Todos</button> */}
+      {/* </div> */}
+      {/* <div> */}
+        {/* <div className="allDone">
           <input
             className="checkbox"
             type="checkbox"
@@ -67,8 +80,8 @@ const App = () => {
             onChange={toggleAllDone}
           />
           <label htmlFor="allDone">Mark All Done</label>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       <div>
         {todos.map((todoItem, index) => {
           return (
