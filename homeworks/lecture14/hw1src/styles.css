@@ -1,0 +1,98 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1200px;
+  font-family: Arial, sans-serif;
+}
+
+.userList {
+  flex: 1;
+  margin-right: 20px;
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+}
+
+.userList h2 {
+  margin-bottom: 1rem;
+}
+
+.userListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.userListItem:hover {
+  background-color: #f0f0f0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.userProfile {
+  flex: 2;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fafafa;
+  height: fit-content;
+  margin-top: 30%;
+  box-shadow: 5px 10px 8px#555;
+}
+
+.userProfile p {
+  margin: 0;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profileAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.heading {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.subHeading {
+  margin: 0;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.repoList {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.repoItem {
+  margin-bottom: 5px;
+}
+
+.repoDesc {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 10px;
+}
