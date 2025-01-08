@@ -1,9 +1,15 @@
 import React from "react";
 import "./app.css";
+import { useDispatch } from "react-redux"
+import { updateTodo } from "./features/todoListSlice";
 
-const TodoItem = ({ todoItem, index, handleCheckItem }) => {
-  const handleClick = () => handleCheckItem(index);
-  const { itemLabel, isCompleted } = todoItem;
+const TodoItem = ({ todoItem }) => {
+  
+  const { itemLabel, isCompleted, _id } = todoItem;
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(updateTodo(_id))
+  };
 
   return (
     <div className="todoItem">
