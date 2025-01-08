@@ -4,7 +4,7 @@ const UPDATE_TODOS = "UPDATE_TODOS"
 const UPDATE_ISALLDONE = "UPDATE_ISALLDONE"
 
 const initialState = {
-    todos: [{ itemLabel: "grocery shopping for next week", isCompleted: false }],
+    todos: [{ itemLabel: "sample todo item form plain redux", isCompleted: false }],
     inputVal: "",
     isAllDone: false
 }

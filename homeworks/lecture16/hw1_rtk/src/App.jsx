@@ -2,20 +2,21 @@ import React from "react";
 import "./app.css";
 import TodoItem from "./TodoItem";
 import { useSelector, useDispatch } from "react-redux"
+import { actions } from "./features/todoListSlice"
 
 const App = () => {
   const inputVal = useSelector(state => state.inputVal)
   const todos = useSelector(state => state.todos)
   const isAllDone = useSelector(state => state.isAllDone)
-
+  
   const dispatch = useDispatch()
 
   let remaining = todos.filter((item) => !item.isCompleted).length;
 
   const handleAddTodoItem = (e) => {
     if (e.key === "Enter") {
-      dispatch({ type: "ADD_ITEM", payload: { itemLabel: e.target.value, isCompleted: false }})
-      dispatch({ type: "SET_INPUT", payload: ""})
+      dispatch(actions.addItem({itemLabel: e.target.value, isCompleted: false}))
+      dispatch(actions.setInput(""))
     }
   };
 
@@ -27,19 +28,19 @@ const App = () => {
             return item;
           }
         })
-    dispatch({ type: "UPDATE_TODOS", payload: newTodos })
+    dispatch(actions.updateTodos(newTodos))
   };
 
   const toggleAllDone = () => {
     const newTodos = todos.map((item) => ({ ...item, isCompleted: !isAllDone }))
-    dispatch({ type: "UPDATE_TODOS", payload: newTodos })
-    dispatch({ type: "UPDATE_ISALLDONE", payload: !isAllDone});
+    dispatch(actions.updateTodos(newTodos))
+    dispatch(actions.updateIsAllDone(!isAllDone))
   };
 
   const handleClear = () => {
     const newTodos = todos.map((item) => ({ ...item, isCompleted: false }))
-    dispatch({ type: "UPDATE_TODOS", payload: newTodos })
-    dispatch({ type: "UPDATE_ISALLDONE", payload: false});
+    dispatch(actions.updateTodos(newTodos))
+    dispatch(actions.updateIsAllDone(false))
   };
 
   return (
@@ -49,7 +50,7 @@ const App = () => {
         className="inputField"
         placeholder="Type a todo and hit enter"
         value={inputVal}
-        onChange={(e) => dispatch({ type: "SET_INPUT", payload: e.target.value })}
+        onChange={(e) => dispatch(actions.setInput(e.target.value))}
         onKeyDown={handleAddTodoItem}
       />
       <div className="status">

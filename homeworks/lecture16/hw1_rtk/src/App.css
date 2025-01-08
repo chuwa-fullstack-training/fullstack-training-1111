@@ -1,0 +1,53 @@
+.page {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    margin: 15px 25px;
+    width: 70%;
+  }
+  
+  .inputField {
+    height: 35px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 3px 10px;
+    box-sizing: border-box;
+  }
+  
+  .inputField:focus {
+    outline-color: lightblue;
+    outline-width: 5px;
+  }
+  
+  .status {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button {
+    padding: 2px 3px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: lightcoral;
+  }
+  
+  .allDone {
+    margin-bottom: 10px;
+  }
+  
+  .todoItem {
+    margin-left: 20px;
+    padding: 8px 4px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  
+  .checkbox {
+    margin: 0;
+    margin-right: 5px;
+  }
