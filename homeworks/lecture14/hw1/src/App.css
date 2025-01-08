@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 30%;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  display: flex;
+}
+
+.sidebar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sidebar table img {
+  border: none;
+  height: 100px;
+  width: 100px;
+}
+
+.sidebar table th,
+.sidebar table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar table tbody tr:hover{
+  background-color: #ddd;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
