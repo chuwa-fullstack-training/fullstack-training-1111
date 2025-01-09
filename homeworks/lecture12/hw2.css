@@ -1,0 +1,47 @@
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    'header header header'
+    'nav nav nav'
+    'aside section section'
+    'footer footer footer';
+    gap: 10px;
+}
+
+.grid-item1 {
+    grid-area: header;
+    border: 5px solid gray;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.grid-item2 {
+    grid-area: nav;
+    border: 5px solid gray;
+    text-align: center;
+}
+
+.grid-item3 {
+    grid-area: aside;
+    border: 5px solid gray;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+
+.grid-item4 {
+    grid-area: section;
+    border: 5px solid gray;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+
+.grid-item5 {
+    grid-area: footer;
+    border: 5px solid gray;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}

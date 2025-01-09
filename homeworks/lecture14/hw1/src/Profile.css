@@ -1,0 +1,27 @@
+.userProfile {
+    display: grid;
+    grid-template-areas: 'userAvator userDetails userDetails';
+    margin: 20px 70px;
+    border: 1px solid gray;
+    padding: 30px;
+    height: 300px;
+    width: 400px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.userDetails {
+    grid-area: userDetails;
+}
+
+.userAvator {
+    grid-area: userAvator;
+    margin-right: 30px;
+}
+
+.userAvator img {
+    border-radius: 50%;
+}
+
+.userName {
+    font-weight: bold;
+}
