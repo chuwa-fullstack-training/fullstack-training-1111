@@ -1,0 +1,28 @@
+.grid,
+.item {
+  box-sizing: border-box;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  margin: 0;
+  flex: 0 0 calc((100% - 40px) / 3);
+  width: auto;
+  height: auto;
+  background-color: white;
+  text-align: center;
+  line-height: 100px;
+  border: none;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
