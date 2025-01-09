@@ -1,0 +1,177 @@
+//用户名是aa, 密码是123
+
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    navigate("/login");
+  };
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+};
+
+const Login = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const storedUser = localStorage.getItem("username");
+    const storedPass = localStorage.getItem("password");
+
+    if (storedUser && storedPass) {
+      if (username === storedUser && password === storedPass) {
+        localStorage.setItem("auth", "true");
+        navigate("/users");
+      } else {
+        alert("Invalid credentials");
+      }
+    } else {
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+      localStorage.setItem("auth", "true");
+      navigate("/");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+const Users = () => {
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch("https://api.github.com/users");
+      const data = await response.json();
+      setUsers(data);
+    };
+    fetchUsers();
+  }, []);
+
+  return (
+    <div>
+      <h1>GitHub Users</h1>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>ID</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Username</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr
+              key={user.id}
+              onClick={() => navigate(`/users/${user.login}`)}
+              style={{ cursor: "pointer", textAlign: "center" }}
+            >
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.id}</td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.login}</td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <img
+                  src={user.avatar_url}
+                  alt={user.login}
+                  style={{ width: "50px", borderRadius: "50%" }}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const UserDetail = () => {
+  const { login } = useParams();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(`https://api.github.com/users/${login}`);
+      const data = await response.json();
+      setUser(data);
+    };
+    fetchUser();
+  }, [login]);
+
+  if (!user) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>{user.name || user.login}</h1>
+      <img src={user.avatar_url} alt={user.login} style={{ width: "150px" }} />
+      <p><strong>ID:</strong> {user.id}</p>
+      <p><strong>Username:</strong> {user.login}</p>
+      <p><strong>Bio:</strong> {user.bio || "No bio available"}</p>
+      <p><strong>Profile:</strong> <a href={user.html_url} target="_blank" rel="noopener noreferrer">{user.html_url}</a></p>
+    </div>
+  );
+};
+
+const ProtectedRoute = ({ children }) => {
+  const isAuth = localStorage.getItem("auth") === "true";
+  return isAuth ? children : <Navigate to="/login" />;
+};
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/users/:login"
+          element={
+            <ProtectedRoute>
+              <UserDetail />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

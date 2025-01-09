@@ -1,0 +1,88 @@
+import React, { Component } from "react";
+import "./styles.css";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [],
+      inputValue: ""
+    };
+  }
+
+  handleInputChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
+
+  handleKeyPress = (e) => {
+    const { inputValue, todos } = this.state;
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      this.setState({
+        todos: [...todos, { text: inputValue, completed: false }],
+        inputValue: ""
+      });
+    }
+  };
+
+  toggleTodo = (index) => {
+    this.setState((prevState) => {
+      const updatedTodos = prevState.todos.map((todo, i) =>
+        i === index ? { ...todo, completed: !todo.completed } : todo
+      );
+      return { todos: updatedTodos };
+    });
+  };
+
+  clearFinishedTodos = () => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo) => !todo.completed)
+    }));
+  };
+
+  render() {
+    const { todos, inputValue } = this.state;
+    const remainingCount = todos.filter((todo) => !todo.completed).length;
+
+    return (
+      <div className="App">
+        <input
+          type="text"
+          placeholder="Enter a todo"
+          value={inputValue}
+          onChange={this.handleInputChange}
+          onKeyPress={this.handleKeyPress}
+        />
+        <div
+          style={{ display: "flex", justifyContent: "space-between", margin: "10px 0" }}
+        >
+          <span>{remainingCount} remaining</span>
+          <button onClick={this.clearFinishedTodos}>Clear All Finished Todos</button>
+        </div>
+        <ul>
+          {todos.map((todo, index) => (
+            <li
+              key={index}
+              style={{ display: "flex", alignItems: "center", margin: "5px 0" }}
+            >
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => this.toggleTodo(index)}
+              />
+              <span
+                style={{
+                  textDecoration: todo.completed ? "line-through" : "none",
+                  marginLeft: "10px"
+                }}
+              >
+                {todo.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default App;

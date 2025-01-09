@@ -1,0 +1,95 @@
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { useSelector, useDispatch } from "react-redux";
+
+// Redux Slice for Todos
+const todosSlice = createSlice({
+  name: "todos",
+  initialState: [],
+  reducers: {
+    addTodo: (state, action) => {
+      state.push({ text: action.payload, completed: false });
+    },
+    toggleTodo: (state, action) => {
+      const todo = state[action.payload];
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+    },
+    clearFinishedTodos: (state) => {
+      return state.filter((todo) => !todo.completed);
+    },
+  },
+});
+
+const { addTodo, toggleTodo, clearFinishedTodos } = todosSlice.actions;
+const store = configureStore({ reducer: { todos: todosSlice.reducer } });
+
+// Todo List Component
+const TodoList = () => {
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = React.useState("");
+
+  const handleAddTodo = (e) => {
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      dispatch(addTodo(inputValue));
+      setInputValue("");
+    }
+  };
+
+  const remainingCount = todos.filter((todo) => !todo.completed).length;
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        placeholder="Enter a todo"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyPress={handleAddTodo}
+      />
+      <div
+        style={{ display: "flex", justifyContent: "space-between", margin: "10px 0" }}
+      >
+        <span>{remainingCount} remaining</span>
+        <button onClick={() => dispatch(clearFinishedTodos())}>Clear All Finished Todos</button>
+      </div>
+      <ul>
+        {todos.map((todo, index) => (
+          <li
+            key={index}
+            style={{ display: "flex", alignItems: "center", margin: "5px 0" }}
+          >
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => dispatch(toggleTodo(index))}
+            />
+            <span
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+                marginLeft: "10px",
+              }}
+            >
+              {todo.text}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// App Component
+const App = () => {
+  return (
+    <Provider store={store}>
+      <TodoList />
+    </Provider>
+  );
+};
+
+export default App;
