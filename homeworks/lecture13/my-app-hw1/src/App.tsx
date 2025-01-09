@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addTodo,
+  toggleTodo,
+  markAllDone,
+  clearCompleted,
+} from "./redux/todoSlice";
 
 interface Todo {
   text: string;
@@ -29,35 +36,21 @@ const TodoList: React.FC<TodoListProps> = ({ todos, toggleTodo }) => {
 
 const App = () => {
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const todos = useSelector((state: any) => state.todos);
+  const dispatch = useDispatch();
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && text.trim()) {
-      setTodos([...todos, { text: text.trim(), completed: false }]);
+      dispatch(addTodo(text.trim()));
       setText("");
     }
   };
 
-  const toggleTodo = (index: number) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo, i) =>
-        i === index ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const handleAllDone = () => {
-    setTodos((prevtodos) =>
-      prevtodos.map((todo) => ({ ...todo, completed: true }))
-    );
-  };
-
-  const handleClearCompletedTodos = () => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
-  };
+  const handleAllDone = () => dispatch(markAllDone());
+  const handleClearCompletedTodos = () => dispatch(clearCompleted());
 
   const numCompletedTodos = todos.reduce(
-    (acc, curr) => (curr.completed ? acc : acc + 1),
+    (acc: number, curr: any) => (curr.completed ? acc : acc + 1),
     0
   );
 
@@ -82,7 +75,10 @@ const App = () => {
           Clear Completed Todos
         </button>
       </div>
-      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <TodoList
+        todos={todos}
+        toggleTodo={(index: number) => dispatch(toggleTodo(index))}
+      />
     </div>
   );
 };
