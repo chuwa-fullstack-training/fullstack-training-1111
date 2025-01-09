@@ -1,0 +1,58 @@
+.layout {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box; /* Include padding and border in dimensions */
+  }
+  
+  .header {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #000;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .nav {
+    background-color: #e0e0e0;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #000;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .content {
+    display: flex; /* Place aside and section side by side */
+    flex: 1; /* Take up remaining vertical space */
+    gap: 10px; /* Space between aside and section */
+  }
+  
+  .aside {
+    background-color: #d0d0d0;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #000;
+    font-size: 18px;
+    flex: 1; /* Take 1 part of the content area */
+  }
+  
+  .section {
+    background-color: #c0c0c0;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #000;
+    font-size: 18px;
+    flex: 3; /* Take 3 parts of the content area */
+  }
+  
+  .footer {
+    background-color: #b0b0b0;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #000;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
