@@ -1,36 +1,14 @@
-import React, { useState } from "react";
-import "./App.css";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import "./App.css";
 
-type BoxProps = {
-  name: string;
-  color: string;
-  onNameChange: (newName: string) => void;
-};
-
-const Box: React.FC<BoxProps> = ({ name, color, onNameChange }) => {
-  return (
-    <Card className="card" style={{ backgroundColor: color }}>
-      <CardHeader>
-        <CardTitle>Component Name:</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => onNameChange(e.target.value)}
-          className="shadcn-input"
-        />
-      </CardContent>
-    </Card>
-  );
-};
+import NavBar from "./Navbar";
+import BoxPage from "./BoxPage";
 
 function App() {
   const defaultNames = ["first", "second", "third", "fourth", "fifth", "sixth"];
@@ -46,78 +24,53 @@ function App() {
     "navy",
   ];
 
-  const [boxNames, setBoxNames] = useState(defaultNames);
-  const [boxColors, setBoxColors] = useState(Array(6).fill("white"));
+  const [boxes, setBoxes] = useState(
+    defaultNames.map((name) => ({ name, color: "white" }))
+  );
 
-  const [selectedBox, setSelectedBox] = useState<number | null>(null);
-
-  const handleNameChange = (index: number, newName: string) => {
-    const updatedNames = [...boxNames];
-    updatedNames[index] = newName;
-    setBoxNames(updatedNames);
-  };
-
-  const handleColorChange = (newColor: string) => {
-    if (selectedBox !== null) {
-      const updatedColors = [...boxColors];
-      updatedColors[selectedBox] = newColor;
-      setBoxColors(updatedColors);
-    }
+  const updateBox = (index: number, newName?: string, newColor?: string) => {
+    setBoxes((prev) =>
+      prev.map((box, i) =>
+        i === index
+          ? { ...box, name: newName ?? box.name, color: newColor ?? box.color }
+          : box
+      )
+    );
   };
 
   return (
-    <div className="container">
-      {/* Dropdown menu for box selection */}
-      <div className="controls">
-        <DropdownMenu>
-          <DropdownMenuTrigger className="dropdown">
-            {selectedBox !== null ? boxNames[selectedBox] : "Select a Box"}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {boxNames.map((name, index) => (
-              <DropdownMenuItem
-                key={index}
-                onClick={() => setSelectedBox(index)}
-              >
-                {name}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        {/* Dropdown menu for color selection */}
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className="dropdown"
-            disabled={selectedBox === null}
-          >
-            Select a color
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {colors.map((name, index) => (
-              <DropdownMenuItem
-                key={index}
-                onClick={() => handleColorChange(name)}
-              >
-                {name}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Navigate to="/0" replace />} />
+          {boxes.map((box, index) => (
+            <Route
+              key={index}
+              path={`/${index}`}
+              element={
+                <>
+                  <NavBar
+                    boxNames={boxes.map((box) => box.name)}
+                    colors={colors}
+                    selectedBox={index}
+                    onColorChange={(newColor) =>
+                      updateBox(index, undefined, newColor)
+                    }
+                  />
+                  <BoxPage
+                    box={box}
+                    onNameChange={(newName) => updateBox(index, newName)}
+                    onColorChange={(newColor) =>
+                      updateBox(index, undefined, newColor)
+                    }
+                  />
+                </>
+              }
+            />
+          ))}
+        </Routes>
       </div>
-
-      {/* Render boxes */}
-      <div className="grid">
-        {boxNames.map((name, index) => (
-          <Box
-            key={index}
-            name={name}
-            color={boxColors[index]}
-            onNameChange={(newName) => handleNameChange(index, newName)}
-          />
-        ))}
-      </div>
-    </div>
+    </Router>
   );
 }
 
