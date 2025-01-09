@@ -1,0 +1,61 @@
+import React from "react";
+
+function Layout() {
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100vh",
+    },
+    header: {
+      textAlign: "center",
+      padding: "20px",
+      backgroundColor: "#ddd",
+      fontWeight: "bold",
+    },
+    nav: {
+      textAlign: "center",
+      padding: "20px",
+      backgroundColor: "#f0f0f0",
+      fontWeight: "bold",
+    },
+    main: {
+      display: "flex",
+      flex: 1,
+    },
+    aside: {
+      flex: 1,
+      padding: "20px",
+      textAlign: "center",
+      backgroundColor: "#f9f9f9",
+      fontWeight: "bold",
+    },
+    section: {
+      flex: 2,
+      padding: "20px",
+      textAlign: "center",
+      backgroundColor: "#e9e9e9",
+      fontWeight: "bold",
+    },
+    footer: {
+      textAlign: "center",
+      padding: "20px",
+      backgroundColor: "#ddd",
+      fontWeight: "bold",
+    },
+  };
+
+  return (
+    <div style={styles.container}>
+      <header style={styles.header}>Header</header>
+      <nav style={styles.nav}>Nav</nav>
+      <div style={styles.main}>
+        <aside style={styles.aside}>Aside</aside>
+        <section style={styles.section}>Section</section>
+      </div>
+      <footer style={styles.footer}>Footer</footer>
+    </div>
+  );
+}
+
+export default Layout;

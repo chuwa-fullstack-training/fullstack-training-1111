@@ -1,0 +1,41 @@
+import { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [convertedValue, setConvertedValue] = useState("");
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (!isNaN(value) && value.trim() !== "") {
+      setConvertedValue(convertToOrdinal(Number(value)));
+    } else {
+      setConvertedValue(value);
+    }
+  };
+
+  const convertToOrdinal = (num) => {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const remainder = num % 100;
+    return num + (suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0]);
+  };
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        placeholder="Enter a number"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        placeholder="Converted value"
+        value={convertedValue}
+        readOnly
+      />
+    </div>
+  );
+}
