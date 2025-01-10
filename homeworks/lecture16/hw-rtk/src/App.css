@@ -1,0 +1,102 @@
+
+.App {
+  height: 100vh;
+  width: 80vw;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  box-shadow: 0 0 5px #767272;
+}
+
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 80%;
+  margin-top: 20px;
+  border-radius: 5px;
+  align-items: center;
+  box-shadow: 0 0 10px #949494;
+}
+
+.todoContent {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-top: 20px;
+}
+
+.todoInput {
+  width: 500px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+#todoInput {
+  width: 100%;
+  height: 24px;
+  padding: 5px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#todoInput:focus {
+  outline: none;
+  box-shadow: 0 0 5px #8ac0f5;
+}
+
+.todoInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todoInfo button {
+  width: 200px;
+  height: 30px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #888888;
+  border-radius: 8px;
+}
+
+#toggleAll {
+  border: 1px solid #ab3d3d;
+}
+
+.markAll label {
+  margin-left: 8px;
+}
+
+.todoContainer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todoContainer ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.todoContainer ul li:hover {
+  background-color: #f0f0f0;
+}
+
+.todoContainer ul li span {
+  margin-left: 10px;
+}

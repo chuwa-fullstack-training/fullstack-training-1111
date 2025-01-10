@@ -1,0 +1,131 @@
+body {
+  overflow: hidden;
+}
+
+.App {
+  display: grid;
+  grid-template-rows: 2fr 1fr 16fr 1fr;
+  height: 100vh;
+  padding: 10px 20px;
+}
+
+header {
+  grid-row: 1;
+  background-color: azure;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #888;
+  box-shadow: 2px 2px 5px #888;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+header:hover {
+  box-shadow: 4px 4px 10px #666;
+  border: 1px solid #666;
+}
+
+nav {
+  grid-row: 2;
+  background-color: #f0f0f0;
+  text-align: center;
+  border: 1px solid #888;
+  box-shadow: 2px 2px 5px #888;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+nav:hover {
+  box-shadow: 4px 4px 10px #666;
+  border: 1px solid #666;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+nav ul li a:hover {
+  color: #e77cef;
+}
+
+.content {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.aside {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #888;
+  box-shadow: 2px 2px 5px #888;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.aside:hover {
+  box-shadow: 4px 4px 8px #666;
+  border: 1px solid #666;
+}
+
+.section {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #888;
+  box-shadow: 2px 2px 5px #888;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.section:hover {
+  box-shadow: 4px 4px 8px #666;
+  border: 1px solid #666;
+}
+
+.App button {
+  background-color: rgba(222, 222, 222, 0.826);
+  padding: 10px 20px;
+  margin: 3px;
+  border-bottom: 5px solid #888;
+  border-right: 5px solid #888;
+  border-top: 5px solid #f0f0f0;
+  border-left: 5px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.App button:hover {
+  background-color: rgba(222, 222, 222, 0.926);
+  border-bottom: 5px solid #666;
+  border-right: 5px solid #666;
+  border-top: 5px solid #f0f0f0;
+  border-left: 5px solid #f0f0f0;
+}
+
+.App button:focus {
+  box-shadow: 0 0 5px 2px rgb(71, 190, 255);
+}
+
+.App input {
+  padding: 5px;
+  margin: 3px;
+  border: 1px solid #888;
+}
+
+.App input:focus {
+  box-shadow: 0 0 10px 2px rgb(71, 190, 255);
+  outline: none;
+}
+
+.footer {
+  grid-row: 4;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}

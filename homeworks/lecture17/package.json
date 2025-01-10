@@ -1,0 +1,19 @@
+{
+  "name": "lecture17",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "quick-install": "npm install && npm run client-install && npm run server-install",
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install" 
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
