@@ -1,0 +1,54 @@
+/* Reset basic styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Container with grid layout */
+  .layout-container {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "nav main"
+      "footer footer";
+    grid-template-rows: 60px 1fr 40px; 
+    grid-template-columns: 200px 1fr; 
+    height: 100vh; 
+  }
+  
+  /* Header styling */
+  .header {
+    grid-area: header;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    font-size: 20px;
+  }
+  
+  /* Navigation (Sidebar) styling */
+  .nav {
+    grid-area: nav;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Main content styling */
+  .main {
+    grid-area: main;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Footer styling */
+  .footer {
+    grid-area: footer;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+  }
